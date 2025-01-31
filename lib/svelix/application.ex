@@ -16,6 +16,11 @@ defmodule Svelix.Application do
       {Finch, name: Svelix.Finch},
       # Start a worker by calling: Svelix.Worker.start_link(arg)
       # {Svelix.Worker, arg},
+
+      # Start the SSR process pool for Inertia/Svelte
+      # You must specify a `path` option to locate `ssr.js`
+      {Inertia.SSR, path: Path.join([Application.app_dir(:svelix), "priv"])},
+
       # Start to serve requests, typically the last entry
       SvelixWeb.Endpoint
     ]
