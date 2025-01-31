@@ -41,7 +41,7 @@ defmodule Svelix.MixProject do
       {:phoenix_live_view, "~> 1.0.0"},
       {:floki, ">= 0.30.0", only: :test},
       {:phoenix_live_dashboard, "~> 0.8.3"},
-      {:esbuild, "~> 0.8", runtime: Mix.env() == :dev},
+      # {:esbuild, "~> 0.8", runtime: Mix.env() == :dev},
       {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},
       {:heroicons,
        github: "tailwindlabs/heroicons",
@@ -74,11 +74,16 @@ defmodule Svelix.MixProject do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
-      "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
-      "assets.build": ["tailwind svelix", "esbuild svelix"],
+      "assets.setup": ["tailwind.install --if-missing", "cmd --cd assets npm install"],
+      "assets.build": [
+        "tailwind svelix",
+        "cmd --cd assets node build.js",
+        "cmd --cd assets node build.js --ssr"
+      ],
       "assets.deploy": [
         "tailwind svelix --minify",
-        "esbuild svelix --minify",
+        "cmd --cd assets node build.js --deploy",
+        "cmd --cd assets node build.js --deploy --ssr",
         "phx.digest"
       ]
     ]

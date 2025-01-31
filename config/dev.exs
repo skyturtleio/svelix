@@ -25,7 +25,10 @@ config :svelix, SvelixWeb.Endpoint,
   debug_errors: true,
   secret_key_base: "F4yjwoOCOsnLvaXCoEH2LkG7By0O9il+BDJYo9rk0yZD4R41Ft2FfP2skOXG4lWS",
   watchers: [
-    esbuild: {Esbuild, :install_and_run, [:svelix, ~w(--sourcemap=inline --watch)]},
+    node: ["build.js", "--watch", cd: Path.expand("../assets", __DIR__)],
+    # Uncomment the line below if you want to enable SSR. Right now, I'm having
+    # issues getting SSR to work.
+    # node: ["build.js", "--watch", "--ssr", cd: Path.expand("../assets", __DIR__)],
     tailwind: {Tailwind, :install_and_run, [:svelix, ~w(--watch)]}
   ]
 
