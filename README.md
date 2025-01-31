@@ -1,5 +1,7 @@
 # Svelix
 
+An example repo for a modern monolith using Phoenix, Inertia.js, and Svelte. Because Svelte requires an esbuild plugin, you need to have Node installed.
+
 To start your Phoenix server:
 
   * Run `mix setup` to install and setup dependencies
@@ -7,12 +9,16 @@ To start your Phoenix server:
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
 
-## Learn more
+## Server-side Setup
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+- Add the `:inertia` package to your deps in `mix.exs` and run `mix deps.get`
+
+```elixir
+  {:inertia, "~> 2.1.0"}
+```
+
+- Add Inertia configuration to `confix.exs`
+- Add Inertia helpers for Controller and HTML to `SvelixWeb`
+- Add `Inertia.Plug` to your browser pipeline in your `router.ex`
+- Update `<head>` component in the root layout so the client-side library will keep the title in sync
