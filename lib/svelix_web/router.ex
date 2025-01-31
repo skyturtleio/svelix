@@ -19,6 +19,7 @@ defmodule SvelixWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    get "/message", PageController, :message
   end
 
   # Other scopes may use custom stacks.
