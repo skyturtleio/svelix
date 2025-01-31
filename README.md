@@ -1,16 +1,18 @@
 # Svelix
 
-An example repo for a modern monolith using Phoenix, Inertia.js, and Svelte. Because Svelte requires an esbuild plugin, you need to have Node installed.
+An example repo for a modern monolith using Phoenix, Inertia.js, and Svelte 5. Svelte requires an esbuild plugin so you need to have Node.js installed. This application was built using Node.js v22.13.1.
 
 To start your Phoenix server:
 
   * Run `mix setup` to install and setup dependencies
   * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+Now you can visit [`localhost:4000`](http://localhost:4000) from your browser. The home page is a Svelte component being rendered by Inertia.
 
+The official setup instructions can be found on HexDocs for the [Inertia.js Phoenix Adapter](https://hexdocs.pm/inertia/readme.html#installation). The setup instructions below give a high-level overview of the steps. The details below are to help out my future self and also clariy some questions I had as I was going through the instructions. The server-side setup follows the official instructions closely. The client-side setup is fairly different because the official docs use React.
 
 ## Server-side Setup
+
 
 - Add the `:inertia` package to your deps in `mix.exs` and run `mix deps.get`
 
