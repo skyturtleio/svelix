@@ -20,7 +20,7 @@ defmodule SvelixWeb.Router do
 
     get "/", PageController, :welcome
     get "/counter", PageController, :counter
-    get "/stock", PageController, :home
+    get "/stock", PageController, :stock
   end
 
   # Other scopes may use custom stacks.
