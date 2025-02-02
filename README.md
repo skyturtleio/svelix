@@ -2,6 +2,10 @@
 
 An example repo for a modern monolith using Phoenix, Inertia.js, and Svelte 5. Svelte requires an esbuild plugin so you need to have Node.js installed. This application was built using Node.js v22.13.1.
 
+You can find the application running at https://svelix.skyturtle.io/
+
+## Development 
+
 To start your Phoenix server:
 
   * Run `mix setup` to install and setup dependencies
@@ -9,10 +13,9 @@ To start your Phoenix server:
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser. The home page is a Svelte component being rendered by Inertia.
 
-The official setup instructions can be found on HexDocs for the [Inertia.js Phoenix Adapter](https://hexdocs.pm/inertia/readme.html#installation). The setup instructions below give a high-level overview of the steps. The details below are to help out my future self and also clariy some questions I had as I was going through the instructions. The server-side setup follows the official instructions closely. The client-side setup is fairly different because the official docs use React.
+The official setup instructions can be found on HexDocs for the [Inertia.js Phoenix Adapter](https://hexdocs.pm/inertia/readme.html#installation). The setup instructions below give a high-level overview of the steps. The details below are to help out my future self and also clariy some questions I had as I was going through the instructions. The server-side setup follows the official instructions closely. The client-side setup is fairly different because the Phoenix adapter docs use React.
 
 ## Server-side Setup
-
 
 - Add the `:inertia` package to your deps in `mix.exs` and run `mix deps.get`
 
@@ -27,7 +30,9 @@ The official setup instructions can be found on HexDocs for the [Inertia.js Phoe
 
 ## Client-side Setup
 
-- Install the Inertia.js library for your frontend library as well as the frontend library itself. Remember, everything "frontend" related will be done in the `assets` directory. Also, because Svelte will be processed through an esbuild plugin, we will install those required dependencies and also remove the esbuild hex package from the Elixir deps.
+NOTE: DO NOT HAVE SSR WORKING YET EVEN THOUGH THE CODE IS IN `build.js`
+
+Install the Inertia.js library for your frontend library as well as the frontend library itself. Remember, everything "frontend" related will be done in the `assets` directory. Also, because Svelte will be processed through an esbuild plugin, we will install those required dependencies and also remove the esbuild hex package from the Elixir deps.
 
 Note that we are using `--prefix assets` so that these commands can be run from the project's root directory.
 
@@ -47,15 +52,13 @@ npm --prefix assets install \
 - Initialize the client-side library in `app.js`.
 - Add `ssr.js`
 - Remove ESBuild (to prepare to use custom `build.js`)
-
-Delete `config :esbuild` from `config.exs`
-Remove `esbuild` dependency in `mix.exs`
-Unlock `esbuild` dependency
-`mix deps.unlock esbuild`
-Add custom `esbuild` script, `build.js`
-Replace esbuild watchers to use custom `build.js` script
-
-- Add a page component in `assets/js/pages/` to render -> otherwise you're going to get an error like `unable to import **/*/pages/blah.svelte`. I was getting this error
+- Delete `config :esbuild` from `config.exs`
+- Remove `esbuild` dependency in `mix.exs`
+- Unlock `esbuild` dependency
+- `mix deps.unlock esbuild`
+- Add custom `esbuild` script, `build.js`
+- Replace esbuild watchers to use custom `build.js` script
+- Add a page component in `assets/js/pages/` to render. Otherwise you're going to get an error like:
 
 ```shell
 [WARNING] The glob pattern import("./pages/**/*.svelte") did not match any files [empty-glob]
@@ -64,8 +67,19 @@ Replace esbuild watchers to use custom `build.js` script
       62 │     return await import(`./pages/${name}.svelte`);
          ╵                         ~~~~~~~~~~~~~~~~~~~~~~~~
 ```
-Update aliases in `mix.exs`
-Add `priv/ssr.js` to gitignore
-Add Inertia.SSR to supervision tree in `application.ex`
-Add SSR to Inertia `:config` -> enable true
+
+- Update aliases in `mix.exs`
+- Add `priv/ssr.js` to gitignore
+- Add Inertia.SSR to supervision tree in `application.ex`
+- Add SSR to Inertia `:config` -> enable true
+
+## Deploying to Coolify
+
+TODO: Explain building release, adding Node.js to Dockerfile that is created when building a release, some pain points: forgot to add Node.js to builder, ran `npm install --omit=dev` (which causes `mix assets.deploy` to fail because `esbuild` is a dev dependency), Ecto migrations (had to change the last command in Dockerfile to run migations before starting the app)
+
+- Add health checks. This article explains how to set up a Plug for health checks: [Health checks for Plug and Phoenix](https://jola.dev/posts/health-checks-for-plug-and-phoenix).
+
+For Coolify, under Healthcheck, check the box for "Enabled". For the settings:
+
+Method GET, Scheme http, Host localhost, Port leave blank (placeholder is 80), Path `/health-check` (which is the route set up in `SvelixWeb.Healthcheck`)
 
