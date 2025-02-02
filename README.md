@@ -1,10 +1,15 @@
 # Svelix
 
-An example repo for a modern monolith using Phoenix, Inertia.js, and Svelte 5. Svelte requires an esbuild plugin so you need to have Node.js installed. This application was built using Node.js v22.13.1.
-
+An example repo for a modern monolith using Phoenix, Inertia.js, and Svelte 5. 
 You can find the application running at https://svelix.skyturtle.io/
 
+It is deployed to a self-hosted VPS using [Coolify](https://www.coolify.io/). A healthcheck has been enabled using a custom plug module, `SvelixWeb.Healthcheck`.
+
+On the home page you will see a basic navbar with three links: `Home`, `Counter`, and `Stock`. `Home` and `Counter` are Svelte components and can be found within the `assets` directory. The `Home` page receives props (text in the `h1` tag and the name `Turtle`) from a standard Phoenix controller. The navigation for the links between these pages uses Inertia with the `use:inertia` Svelte directive. `Stock` is the default home page that ships with `mix phx.new my_app`.
+
 ## Development 
+
+Svelte requires an esbuild plugin so you need to have Node.js installed. This application was built using Node.js v22.13.1. Aside from that, it will have the same requirements as any other Phoenix app e.g., Postgres, Elixir, etc.
 
 To start your Phoenix server:
 
@@ -13,9 +18,11 @@ To start your Phoenix server:
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser. The home page is a Svelte component being rendered by Inertia.
 
-The official setup instructions can be found on HexDocs for the [Inertia.js Phoenix Adapter](https://hexdocs.pm/inertia/readme.html#installation). The setup instructions below give a high-level overview of the steps. The details below are to help out my future self and also clariy some questions I had as I was going through the instructions. The server-side setup follows the official instructions closely. The client-side setup is fairly different because the Phoenix adapter docs use React.
+## Inertia.js Setup
 
-## Server-side Setup
+The official setup instructions can be found on HexDocs for the [Inertia.js Phoenix Adapter](https://hexdocs.pm/inertia/readme.html#installation). These setup instructions give a high-level overview of the steps. The details below are to help out my future self and also clariy some questions I had as I was going through the instructions. The server-side setup follows the official instructions closely. The client-side setup is fairly different because the Phoenix adapter docs use React.
+
+### Server-side Setup
 
 - Add the `:inertia` package to your deps in `mix.exs` and run `mix deps.get`
 
@@ -28,15 +35,15 @@ The official setup instructions can be found on HexDocs for the [Inertia.js Phoe
 - Add `Inertia.Plug` to your browser pipeline in your `router.ex`
 - Update `<head>` component in the root layout so the client-side library will keep the title in sync
 
-## Client-side Setup
+### Client-side Setup
 
-NOTE: DO NOT HAVE SSR WORKING YET EVEN THOUGH THE CODE IS IN `build.js`
+**NOTE: SSR IS NOT WORKING YET EVEN THOUGH THE CODE IS IN `build.js`**
 
 Install the Inertia.js library for your frontend library as well as the frontend library itself. Remember, everything "frontend" related will be done in the `assets` directory. Also, because Svelte will be processed through an esbuild plugin, we will install those required dependencies and also remove the esbuild hex package from the Elixir deps.
 
-Note that we are using `--prefix assets` so that these commands can be run from the project's root directory.
+We are using `--prefix assets` so that these commands can be run from the project's root directory.
 
-Install the esbuild and the esbuild-svelte plugin:
+- Install the esbuild and the esbuild-svelte plugin:
 
 ```shell
 npm --prefix assets install -D esbuild esbuild-svelte

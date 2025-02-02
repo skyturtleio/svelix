@@ -11,6 +11,9 @@ defmodule SvelixWeb.Endpoint do
     same_site: "Lax"
   ]
 
+  # Run custom plug for healthcheck first so that the
+  # healthcheck will run, then stop, without having
+  # to run the rest of the plugs.
   plug SvelixWeb.Healthcheck
 
   socket "/live", Phoenix.LiveView.Socket,
