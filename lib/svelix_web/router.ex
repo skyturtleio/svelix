@@ -19,6 +19,7 @@ defmodule SvelixWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :welcome
+    get "/counter", PageController, :counter
     get "/stock", PageController, :home
   end
 

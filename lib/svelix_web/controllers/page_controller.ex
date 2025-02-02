@@ -11,6 +11,14 @@ defmodule SvelixWeb.PageController do
     render_inertia(conn, "Welcome")
   end
 
+  def counter(conn, _params) do
+    conn =
+      conn
+      |> assign(:page_title, "Counter")
+
+    render_inertia(conn, "Counter")
+  end
+
   def stock(conn, _params) do
     # Home page for a stock Phoenix app.
     # The home page is often custom made,

@@ -1,7 +1,7 @@
 <script>
   import { inertia } from "@inertiajs/svelte";
 
-  let { to, children } = $props();
+  let { href, children } = $props();
 </script>
 
-<a use:inertia href={to}>{@render children()}</a>
+<a use:inertia {href} class="underline pr-4">{@render children()}</a>
