@@ -54,12 +54,14 @@ import topbar from "topbar"
 import axios from "axios";
 import { createInertiaApp } from "@inertiajs/svelte";
 import { mount } from 'svelte';
+import Layout from "./layouts/Layout.svelte";
 
 axios.defaults.xsrfHeaderName = "x-csrf-token";
 
 createInertiaApp({
   resolve: async (name) => {
-    return await import(`./pages/${name}.svelte`);
+    const page = await import(`./pages/${name}.svelte`);
+    return { default: page.default, layout: page.layout || Layout }
   },
   setup({ App, el, props }) {
     mount(App, { target: el, props })
