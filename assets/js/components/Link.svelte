@@ -7,5 +7,7 @@
 {#if phxLink}
   <a {href} class="underline pr-4">{@render children()}</a>
 {:else}
-  <a use:inertia {href} class="underline pr-4">{@render children()}</a>
+  <a use:inertia={{ prefetch: true }} {href} class="underline pr-4"
+    >{@render children()}</a
+  >
 {/if}
