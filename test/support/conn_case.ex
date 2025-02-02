@@ -28,6 +28,9 @@ defmodule SvelixWeb.ConnCase do
       import Plug.Conn
       import Phoenix.ConnTest
       import SvelixWeb.ConnCase
+
+      # Helpers for testing Inertia controller responses
+      import Inertia.Testing
     end
   end
 
