@@ -6,8 +6,8 @@
 
 <main>
   <header class="pb-4">
-    <Link href="/">Home</Link>
-    <Link href="/counter">Counter</Link>
+    <Link href="/" prefetch={"hover"}>Home</Link>
+    <Link href="/counter" prefetch={["mount", "hover"]}>Counter</Link>
     <Link href="/stock" phxLink>Stock</Link>
   </header>
   <div>
