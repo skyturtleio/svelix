@@ -27,7 +27,7 @@ The official setup instructions can be found on HexDocs for the [Inertia.js Phoe
 - Add the `:inertia` package to your deps in `mix.exs` and run `mix deps.get`
 
 ```elixir
-  {:inertia, "~> 2.1.0"}
+  {:inertia, "~> 2.2.0"}
 ```
 
 - Add Inertia configuration to `confix.exs`
