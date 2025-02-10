@@ -77,13 +77,13 @@ defmodule Svelix.MixProject do
       "assets.setup": ["tailwind.install --if-missing", "cmd --cd assets npm install"],
       "assets.build": [
         "tailwind svelix",
-        "cmd --cd assets node build.js",
-        "cmd --cd assets node build.js --ssr"
+        "cmd --cd assets node build.js"
+        # "cmd --cd assets node build.js --ssr"
       ],
       "assets.deploy": [
         "tailwind svelix --minify",
         "cmd --cd assets node build.js --deploy",
-        "cmd --cd assets node build.js --deploy --ssr",
+        # "cmd --cd assets node build.js --deploy --ssr",
         "phx.digest"
       ]
     ]
