@@ -56,12 +56,10 @@ COPY lib lib
 
 COPY assets assets
 
-# install npm packages
-WORKDIR /app/assets
-RUN npm install
-
-# change back to build dir
-WORKDIR /app
+# install npm packages then return to build dir
+# WORKDIR /app/assets
+# RUN npm install
+# WORKDIR /app
 
 # compile assets
 RUN mix assets.deploy
