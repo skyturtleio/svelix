@@ -77,7 +77,7 @@ defmodule Vite do
     alias Vite.PhxManifestReader
 
     @main_js_file "js/app.js"
-    @inertia_js_file "js/inertia.tsx"
+    @inertia_js_file "js/inertia.ts"
 
     @spec read() :: map()
     def read, do: PhxManifestReader.read()
