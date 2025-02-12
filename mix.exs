@@ -8,6 +8,7 @@ defmodule Svelix.MixProject do
       elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
+      consolidate_protocols: Mix.env() != :dev,
       aliases: aliases(),
       deps: deps()
     ]
@@ -32,6 +33,9 @@ defmodule Svelix.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:bun, "~> 1.4"},
+      {:exinertia, "~> 0.7"},
+      {:igniter, "~> 0.5", only: [:dev, :test]},
       {:phoenix, "~> 1.7.18"},
       {:phoenix_ecto, "~> 4.5"},
       {:ecto_sql, "~> 3.10"},
@@ -41,8 +45,6 @@ defmodule Svelix.MixProject do
       {:phoenix_live_view, "~> 1.0.0"},
       {:floki, ">= 0.30.0", only: :test},
       {:phoenix_live_dashboard, "~> 0.8.3"},
-      # {:esbuild, "~> 0.8", runtime: Mix.env() == :dev},
-      {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},
       {:heroicons,
        github: "tailwindlabs/heroicons",
        tag: "v2.1.1",
@@ -74,16 +76,17 @@ defmodule Svelix.MixProject do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
-      "assets.setup": ["tailwind.install --if-missing", "cmd --cd assets npm install"],
+      "assets.setup": ["bun.install --if-missing", "bun install"],
       "assets.build": [
-        "tailwind svelix",
-        "cmd --cd assets node build.js"
+        "bun install",
+        "bun build",
+        "bun css"
         # "cmd --cd assets node build.js --ssr"
       ],
       "assets.deploy": [
-        "tailwind svelix --minify",
-        "cmd --cd assets node build.js --deploy",
-        # "cmd --cd assets node build.js --deploy --ssr",
+        "bun install",
+        "bun build --minify",
+        "bun css --minify",
         "phx.digest"
       ]
     ]

@@ -1,16 +1,36 @@
 {
+  "name": "exinertia-react-ts",
+  "private": true,
+  "version": "1.0.0",
   "type": "module",
-  "devDependencies": {
-    "esbuild": "^0.24.2",
-    "esbuild-svelte": "^0.9.0"
+  "scripts": {
+    "dev": "../_build/bun x --bun vite",
+    "build": "../_build/bun x --bun vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@inertiajs/svelte": "^2.0.3",
-    "axios": "^1.7.9",
-    "phoenix": "file:../deps/phoenix",
-    "phoenix_html": "file:../deps/phoenix_html",
-    "phoenix_live_view": "file:../deps/phoenix_live_view",
-    "svelte": "^5.19.6",
-    "topbar": "^3.0.0"
-  }
+    "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "phoenix": "workspace:*",
+    "phoenix_html": "workspace:*",
+    "phoenix_live_view": "workspace:*",
+    "svelte": "^5.19.10",
+    "tailwindcss": "3.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@tailwindcss/forms": "^0.5.10",
+    "@types/node": "^22.13.1",
+    "@types/phoenix": "^1.6.6",
+    "@types/phoenix_live_view": "^1.0.0",
+    "eslint": "^9.17.0",
+    "globals": "^15.14.0",
+    "typescript": "~5.6.2",
+    "typescript-eslint": "^8.18.2",
+    "vite": "^6.0.5"
+  },
+  "workspaces": [
+    "../deps/*"
+  ]
 }

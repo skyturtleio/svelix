@@ -4,12 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="csrf-token" content={get_csrf_token()} />
-    <.inertia_title>{@page_title || "Svelix"}</.inertia_title>
+    <.inertia_title>{assigns[:page_title]}</.inertia_title>
     <.inertia_head content={@inertia_head} />
     <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
-
     <%= if dev_env?() do %>
-      <script type="module" src="http://localhost:5173/js/app.js">
+      <script type="module" src="http://localhost:5173/@vite/client">
+      </script>
+      <script type="module" src="http://localhost:5173/js/inertia.ts">
       </script>
     <% else %>
       <script
@@ -17,7 +18,7 @@
         crossorigin
         defer
         phx-track-static
-        src={"/assets/#{Vite.Manifest.main_js()}"}
+        src={"/assets/#{Vite.Manifest.inertia_js()}"}
       >
       </script>
     <% end %>

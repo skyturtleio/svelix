@@ -48,6 +48,7 @@ defmodule SvelixWeb do
       import Plug.Conn
 
       unquote(verified_routes())
+      import Inertia.Controller
     end
   end
 
@@ -80,6 +81,7 @@ defmodule SvelixWeb do
 
       # Include general helpers for rendering HTML
       unquote(html_helpers())
+      import Inertia.HTML
     end
   end
 

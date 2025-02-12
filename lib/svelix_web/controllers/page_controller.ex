@@ -1,6 +1,10 @@
 defmodule SvelixWeb.PageController do
   use SvelixWeb, :controller
 
+  def home(conn, _params) do
+    redirect(conn, to: ~p"/inertia")
+  end
+
   def welcome(conn, _params) do
     conn =
       conn
@@ -28,5 +32,10 @@ defmodule SvelixWeb.PageController do
       |> assign(:page_title, "Stock Phoenix App")
 
     render(conn, :home, layout: false)
+  end
+
+  def inertia(conn, _params) do
+    conn
+    |> render_inertia("Dashboard")
   end
 end

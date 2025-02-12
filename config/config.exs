@@ -7,8 +7,32 @@
 # General application configuration
 import Config
 
+config :bun,
+  version: "1.2.2",
+  dev: [
+    args: ~w(x --bun vite),
+    cd: Path.expand("../assets", __DIR__),
+    env: %{}
+  ],
+  install: [
+    args: ~w(i),
+    cd: Path.expand("../assets", __DIR__),
+    env: %{}
+  ],
+  build: [
+    args: ~w(x --bun vite build),
+    cd: Path.expand("../assets", __DIR__),
+    env: %{}
+  ],
+  css: [
+    args: ~w(run tailwindcss --input=css/app.css --output=../priv/static/assets/app.css),
+    cd: Path.expand("../assets", __DIR__),
+    env: %{}
+  ]
+
 config :svelix,
   ecto_repos: [Svelix.Repo],
+  env: config_env(),
   generators: [timestamp_type: :utc_datetime]
 
 # Configures the endpoint
@@ -30,28 +54,6 @@ config :svelix, SvelixWeb.Endpoint,
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
 config :svelix, Svelix.Mailer, adapter: Swoosh.Adapters.Local
-
-# Configure esbuild (the version is required)
-# config :esbuild,
-#   version: "0.17.11",
-#   svelix: [
-#     args:
-#       ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
-#     cd: Path.expand("../assets", __DIR__),
-#     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
-#   ]
-
-# Configure tailwind (the version is required)
-config :tailwind,
-  version: "3.4.3",
-  svelix: [
-    args: ~w(
-      --config=tailwind.config.js
-      --input=css/app.css
-      --output=../priv/static/assets/app.css
-    ),
-    cd: Path.expand("../assets", __DIR__)
-  ]
 
 # Configure Inertia adapter for Phoenix
 config :inertia,

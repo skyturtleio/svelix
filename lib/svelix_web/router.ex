@@ -1,6 +1,16 @@
 defmodule SvelixWeb.Router do
   use SvelixWeb, :router
 
+  pipeline :inertia do
+    plug :accepts, ["html"]
+    plug :fetch_session
+    plug :fetch_live_flash
+    plug :put_root_layout, html: {SvelixWeb.Layouts, :inertia_root}
+    plug :protect_from_forgery
+    plug :put_secure_browser_headers
+    plug Inertia.Plug
+  end
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -15,11 +25,16 @@ defmodule SvelixWeb.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/inertia", SvelixWeb do
+    pipe_through :inertia
+    get "/", PageController, :welcome
+    get "/counter", PageController, :counter
+  end
+
   scope "/", SvelixWeb do
     pipe_through :browser
 
-    get "/", PageController, :welcome
-    get "/counter", PageController, :counter
+    get "/", PageController, :home
     get "/stock", PageController, :stock
   end
 
