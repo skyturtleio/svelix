@@ -25,17 +25,17 @@ defmodule SvelixWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/inertia", SvelixWeb do
+  scope "/", SvelixWeb do
     pipe_through :inertia
     get "/", PageController, :welcome
     get "/counter", PageController, :counter
+    get "/todos", PageController, :todos
   end
 
-  scope "/", SvelixWeb do
+  scope "/stock", SvelixWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
-    get "/stock", PageController, :stock
+    get "/", PageController, :stock
   end
 
   # Other scopes may use custom stacks.

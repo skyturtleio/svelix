@@ -6,8 +6,9 @@
 
 <main>
   <header class="pb-4">
-    <Link href="/inertia" prefetch={["hover", "hover"]}>Home</Link>
-    <Link href="/inertia/counter" prefetch={["mount", "hover"]}>Counter</Link>
+    <Link href="/" prefetch={["hover", "hover"]}>Home</Link>
+    <Link href="/counter" prefetch={["mount", "hover"]}>Counter</Link>
+    <Link href="/todos" prefetch={["mount", "hover"]}>Todos</Link>
     <Link href="/stock" phxLink>Stock</Link>
   </header>
   <div>
