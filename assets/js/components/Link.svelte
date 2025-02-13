@@ -2,7 +2,6 @@
   import { inertia } from "@inertiajs/svelte";
 
   let { href, phxLink = false, prefetch, children } = $props();
-  console.log(href, prefetch);
 </script>
 
 {#if phxLink}
