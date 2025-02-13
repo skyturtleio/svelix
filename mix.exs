@@ -81,7 +81,6 @@ defmodule Svelix.MixProject do
         "bun install",
         "bun build",
         "bun css"
-        # "cmd --cd assets node build.js --ssr"
       ],
       "assets.deploy": [
         "bun install",

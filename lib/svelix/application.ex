@@ -19,7 +19,7 @@ defmodule Svelix.Application do
 
       # Start the SSR process pool for Inertia/Svelte
       # You must specify a `path` option to locate `ssr.js`
-      {Inertia.SSR, path: Path.join([Application.app_dir(:svelix), "priv"])},
+      # {Inertia.SSR, path: Path.join([Application.app_dir(:svelix), "priv"])},
 
       # Start to serve requests, typically the last entry
       SvelixWeb.Endpoint
