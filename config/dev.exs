@@ -1,5 +1,7 @@
 import Config
 
+System.put_env("NODE_ENV", "development")
+
 # Configure your database
 config :svelix, Svelix.Repo,
   username: "postgres",
