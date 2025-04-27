@@ -81,7 +81,7 @@ config :inertia,
 
   # Enable server-side rendering for page responses (requires some additional setup,
   # see instructions below). Defaults to `false`.
-  ssr: false,
+  ssr: true,
 
   # Whether to raise an exception when server-side rendering fails (only applies
   # when SSR is enabled). Defaults to `true`.
