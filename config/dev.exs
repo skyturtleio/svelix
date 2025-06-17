@@ -30,7 +30,7 @@ config :svelix, SvelixWeb.Endpoint,
     node: ["build.js", "--watch", cd: Path.expand("../assets", __DIR__)],
     # Uncomment the line below if you want to enable SSR. Right now, I'm having
     # issues getting SSR to work.
-    # node: ["build.js", "--watch", "--ssr", cd: Path.expand("../assets", __DIR__)],
+    node: ["build.js", "--watch", "--ssr", cd: Path.expand("../assets", __DIR__)],
     tailwind: {Tailwind, :install_and_run, [:svelix, ~w(--watch)]}
   ]
 
